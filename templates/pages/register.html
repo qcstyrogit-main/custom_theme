@@ -1,0 +1,70 @@
+{%- extends "templates/web.html" -%}
+
+{%- block page_content -%}
+<div class="auth-wrapper single">
+  <main class="auth-card" role="main" aria-labelledby="register-heading">
+    <div class="card-header">
+      <h1 id="register-heading">Create your account</h1>
+      <p class="muted">Sign up to get access. Your administrator may need to approve new accounts.</p>
+    </div>
+
+    <form id="register-form" method="post" class="form">
+      <label class="field">
+        <span class="label-text">Full name</span>
+        <input name="full_name" type="text" required>
+      </label>
+
+      <label class="field">
+        <span class="label-text">Email address</span>
+        <input name="email" type="email" required>
+      </label>
+
+      <label class="field">
+        <span class="label-text">Password</span>
+        <input name="password" type="password" required minlength="8" aria-describedby="pw-help">
+        <small id="pw-help" class="muted">Minimum 8 characters</small>
+      </label>
+
+      <div class="form-row form-actions">
+        <button type="submit" class="btn primary">Create account</button>
+        <a href="/login" class="link">Already have an account?</a>
+      </div>
+    </form>
+
+    <footer class="card-footer">
+      <small class="muted">By signing up you agree to our terms of service.</small>
+    </footer>
+  </main>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("register-form");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector("button[type=submit]");
+    btn.disabled = true;
+    const payload = {
+      email: form.email.value.trim(),
+      full_name: form.full_name.value.trim(),
+      password: form.password.value
+    };
+    try {
+      const res = await fetch("/api/method/frappe.www.login.sign_up", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(payload)
+      }).then(r => r.json());
+      if (!res.exc) {
+        frappe.msgprint("Account created. Check your email for verification.");
+      } else {
+        frappe.msgprint(res.exc || "Registration failed.");
+      }
+    } catch (err) {
+      frappe.msgprint("Network error. Try again.");
+    }
+    btn.disabled = false;
+  });
+});
+</script>
+{%- endblock -%}

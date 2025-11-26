@@ -1,0 +1,50 @@
+{%- extends "templates/web.html" -%}
+
+{%- block page_content -%}
+<div class="auth-wrapper">
+  <aside class="auth-visual">
+    <img src="/assets/custom_theme/images/hero-bg.jpg" alt="Hero" class="hero-img" />
+    <div class="visual-overlay">
+      <img src="/assets/custom_theme/images/logo.svg" class="logo" alt="Company logo">
+      <h2 class="visual-title">QC Styro</h2>
+      <p class="visual-sub">Quality control & management system</p>
+    </div>
+  </aside>
+
+  <main class="auth-card" role="main" aria-labelledby="login-heading">
+    <div class="card-header">
+      <h1 id="login-heading">Welcome back</h1>
+      <p class="muted">Sign in to continue to <strong>{{ frappe.local.site }}</strong></p>
+    </div>
+
+    <form id="login-form" method="post" action="/api/method/frappe.www.login.login" class="form">
+      <input type="hidden" name="cmd" value="login">
+      <label class="field">
+        <span class="label-text">Email or Username</span>
+        <input name="usr" id="usr" type="text" autocomplete="username" required>
+      </label>
+
+      <label class="field">
+        <span class="label-text">Password</span>
+        <input name="pwd" id="pwd" type="password" autocomplete="current-password" required>
+      </label>
+
+      <div class="form-row form-actions">
+        <button type="submit" class="btn primary" id="login-btn">Sign in</button>
+        <a href="/forgot-password" class="link">Forgot password?</a>
+      </div>
+
+      <div class="divider"><span>or</span></div>
+
+      <div class="form-row">
+        <a href="/register" class="btn outline full">Create an account</a>
+      </div>
+    </form>
+
+    <footer class="card-footer">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">🌙</button>
+      <small class="muted">© {{ frappe.utils.get_datetime().year }} QC Styro</small>
+    </footer>
+  </main>
+</div>
+{%- endblock -%}

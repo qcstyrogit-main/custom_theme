@@ -1,0 +1,73 @@
+/* Polished Login/Forgot/Register CSS for ERPNext custom_theme */
+/* Reset & variables */
+:root{
+  --bg: #f6f8fb;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --accent: #0b5fff;
+  --accent-600: #084ed6;
+  --glass: rgba(255,255,255,0.7);
+  --radius: 12px;
+  --shadow: 0 6px 20px rgba(2,6,23,0.08);
+  --max-width: 420px;
+  --gap: 18px;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg: #0b1020;
+    --card: linear-gradient(180deg, rgba(20,24,38,0.9), rgba(14,18,28,0.9));
+    --muted: #9aa4bf;
+    --accent: #4ea1ff;
+    --accent-600: #2b7be6;
+    --glass: rgba(255,255,255,0.04);
+    --shadow: none;
+  }
+  html.dark { background: var(--bg); color: #e6eef9; }
+}
+
+/* Layout */
+html,body{ height:100%; margin:0; font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:var(--bg); }
+.auth-wrapper{ display:flex; min-height:100vh; align-items:stretch; }
+.auth-wrapper.single{ justify-content:center; padding:48px 20px; }
+.auth-visual{ flex:1; position:relative; display:flex; align-items:center; justify-content:center; overflow:hidden; min-width:360px; }
+.hero-img{ width:110%; height:100vh; object-fit:cover; transform:scale(1.05); filter:contrast(1.02) saturate(1.05); }
+.visual-overlay{ position:absolute; inset:40px auto auto 40px; color:white; text-align:left; z-index:2; }
+.logo{ width:72px; height:auto; display:block; margin-bottom:12px; filter:drop-shadow(0 6px 24px rgba(2,6,23,0.25)); }
+.visual-title{ margin:0; font-size:22px; font-weight:700; text-shadow:0 2px 8px rgba(2,6,23,0.35); }
+.visual-sub{ margin-top:6px; opacity:0.95; max-width:320px; }
+
+/* Card */
+.auth-card{ width:100%; max-width:var(--max-width); margin:auto; padding:32px; box-sizing:border-box; background:var(--card); border-radius:16px; box-shadow:var(--shadow); margin:40px; }
+.card-header h1{ margin:0 0 6px 0; font-size:24px; }
+.muted{ color:var(--muted); font-size:13px; margin:0 0 12px 0; }
+.form{ display:flex; flex-direction:column; gap:var(--gap); margin-top:6px; }
+.field{ display:flex; flex-direction:column; gap:8px; }
+.label-text{ font-weight:600; font-size:13px; color:var(--muted); }
+input[type="text"], input[type="email"], input[type="password"]{ padding:12px 14px; border-radius:10px; border:1px solid rgba(15,23,42,0.06); background:transparent; outline:none; transition:box-shadow .18s, border-color .18s; }
+input:focus{ border-color:var(--accent); box-shadow:0 6px 18px rgba(11,95,255,0.08); }
+.form-actions{ display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-top:6px; }
+
+/* Buttons */
+.btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:10px 14px; border-radius:10px; cursor:pointer; border:none; font-weight:600; }
+.btn.primary{ background:linear-gradient(180deg,var(--accent),var(--accent-600)); color:white; box-shadow:0 8px 24px rgba(11,95,255,0.16); transition:transform .12s ease; }
+.btn.primary:active{ transform:translateY(1px); }
+.btn.outline{ background:transparent; border:1px solid rgba(15,23,42,0.06); color:inherit; padding:10px 12px; }
+.btn.full{ width:100%; }
+
+/* Links & divider */
+.link{ color:var(--accent); text-decoration:none; font-weight:600; font-size:14px; }
+.divider{ text-align:center; margin-top:2px; color:var(--muted); font-size:13px; }
+.divider span{ background:transparent; padding:0 10px; }
+
+/* Footer */
+.card-footer{ margin-top:18px; display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.theme-toggle{ background:transparent; border:1px solid rgba(15,23,42,0.06); padding:8px; border-radius:8px; cursor:pointer; }
+
+/* Responsive */
+@media (max-width:900px){
+  .auth-wrapper{ flex-direction:column; }
+  .auth-visual{ display:none; }
+  .auth-card{ margin:0 auto; border-radius:12px; padding:20px; }
+}
