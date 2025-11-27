@@ -5,6 +5,18 @@ app_description = "Custom Theme"
 app_email = "magbojosmacdenverc@gmail.com"
 app_license = "mit"
 
+
+
+# Add this
+app_include_js = []
+app_include_css = []
+
+# Add route for forgot password
+website_route_rules = [
+    {"from_route": "/forgot-password", "to_route": "custom_theme/forgot-password"},
+    {"from_route": "/", "to_route": "home"},
+]
+
 # Apps
 # ------------------
 
