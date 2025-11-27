@@ -1,5 +1,5 @@
 app_name = "custom_theme"
-app_title = "custom_theme"
+app_title = "custom-theme"
 app_publisher = "Macdenver Magbojos"
 app_description = "Custom Theme"
 app_email = "magbojosmacdenverc@gmail.com"
@@ -27,7 +27,7 @@ website_route_rules = [
 # 	{
 # 		"name": "custom_theme",
 # 		"logo": "/assets/custom_theme/logo.png",
-# 		"title": "custom_theme",
+# 		"title": "custom-theme",
 # 		"route": "/custom_theme",
 # 		"has_permission": "custom_theme.api.permission.has_app_permission"
 # 	}
