@@ -1,4 +1,4 @@
-## custom_theme
+## custom-theme
 
 Custom Theme
 
