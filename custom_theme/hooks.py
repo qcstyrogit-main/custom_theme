@@ -12,7 +12,8 @@ app_include_css = []
 
 # Add route for forgot password
 website_route_rules = [
-    {"from_route": "/forgot-password", "to_route": "custom_theme/forgot-password"}
+    {"from_route": "/forgot-password", "to_route": "custom_theme/forgot-password"},
+    {"from_route": "/", "to_route": "home"},
 ]
 # Apps
 # ------------------

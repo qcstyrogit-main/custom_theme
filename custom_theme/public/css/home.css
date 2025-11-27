@@ -1,0 +1,329 @@
+/* ------------------------------------------------ */
+/* GLOBAL STYLES                                    */
+/* ------------------------------------------------ */
+
+/* Apply Roboto globally */
+html, body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+}
+
+/* Hide Frappe's default header & footer */
+.navbar, .navbar.navbar-expand, .navbar-light, header.navbar, .top-bar, footer, .web-footer {
+    display: none !important;
+}
+
+/* ------------------------------------------------ */
+/* HEADER                                          */
+/* ------------------------------------------------ */
+.home-header {
+    width: 100%;
+    padding: 0.8rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: #ffffff; /* solid white */
+    height: 60px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.home-header .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.home-header .brand-logo {
+    height: 50px;
+    width: auto;
+}
+
+/* Desktop nav */
+.home-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.3rem;
+    padding: 0;
+    margin: 0;
+}
+
+.home-nav ul li {
+    position: relative;
+}
+
+.home-nav ul li a {
+    color: #133880;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.home-nav ul li a:hover {
+    color: #0045DA;
+}
+
+/* Dropdown desktop (Products) */
+.home-nav ul li .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    min-width: 180px;
+    border-radius: 6px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+
+    display: block;       /* keep block for animation */
+    max-height: 0;        /* collapse initially */
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+    padding-top: 0;
+    padding-bottom: 0;
+    transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
+}
+
+.home-nav ul li.has-dropdown:hover > .dropdown-menu {
+    max-height: 500px;     /* enough for items */
+    opacity: 1;
+    visibility: visible;
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+}
+
+.home-nav ul li .dropdown-menu li a {
+    padding: 0.7rem 1rem;
+    display: block;
+    color: #133880;
+    font-weight: 400;
+}
+
+.home-nav ul li .dropdown-menu li a:hover {
+    background: #efefef;
+}
+
+/* Hero spacing */
+.home-hero {
+    padding-top: 140px !important;
+}
+
+.home-hero h1 {
+    font-weight: 700;
+}
+
+.home-hero p {
+    font-weight: 400;
+}
+
+/* ------------------------------------------------ */
+/* MOBILE MENU                                     */
+/* ------------------------------------------------ */
+
+/* Hamburger button */
+.menu-toggle {
+    display: none;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: #133880;
+    cursor: pointer;
+}
+
+/* Mobile nav */
+.mobile-nav {
+    display: flex; /* always flex for layout */
+    flex-direction: column;
+    width: 100%;
+    background: #ffffff;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    padding: 0; /* collapsed initially */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transform: translateY(-10px);
+    opacity: 0;
+    max-height: 0; /* collapse */
+    overflow: hidden;
+    transition: max-height 0.4s ease, transform 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
+}
+
+/* When mobile nav is shown */
+.mobile-nav.show {
+    max-height: 500px; /* adjust based on menu items */
+    padding: 1rem 0;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.mobile-nav a {
+    padding: 0.9rem 1.4rem;
+    color: #133880;
+    text-decoration: none;
+    font-size: 1rem;
+    border-bottom: 1px solid #eaeaea;
+}
+
+.mobile-nav a:hover {
+    background: #f5f5f5;
+}
+
+/* Mobile dropdown (Products submenu) */
+.mobile-dropdown {
+    display: flex;
+    flex-direction: column;
+    padding-left: 1.6rem;
+    max-height: 0; /* collapse */
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.4s ease;
+    padding-top: 0; 
+    padding-bottom: 0;
+    opacity: 0;
+}
+
+.mobile-dropdown.show {
+    max-height: 500px; /* adjust depending on items */
+    padding-top: 0.7rem;
+    padding-bottom: 0.7rem;
+    opacity: 1;
+}
+
+.mobile-dropdown a {
+    padding: 0.7rem 0;
+    color: #133880;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: background 0.3s;
+}
+
+.mobile-dropdown a:hover {
+    background: #f5f5f5;
+}
+
+/* ------------------------------------------------ */
+/* RESPONSIVE                                     */
+/* ------------------------------------------------ */
+@media (max-width: 768px) {
+    .home-nav {
+        display: none !important;
+    }
+    .menu-toggle {
+        display: block;
+    }
+    .home-header {
+        flex-direction: row;
+        justify-content: space-between;
+        height: 60px;
+        padding: 0 1rem;
+    }
+    .home-hero {
+        padding-top: 100px !important;
+    }
+
+    /* Show Back to Top button on mobile */
+    #back-to-top.show {
+        display: flex;
+    }
+}
+
+/* ------------------------------------------------ */
+/* BACK TO TOP BUTTON                               */
+/* ------------------------------------------------ */
+#back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10000;
+    font-size: 1.5rem;
+    background-color: rgba(19, 56, 128, 0.15);
+    color: #133880;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: background 0.3s, transform 0.3s, color 0.3s, opacity 0.3s;
+}
+
+#back-to-top.show {
+    opacity: 3;
+    pointer-events: auto;
+}
+
+#back-to-top:hover {
+    transform: translateY(-2px);
+
+    /* Hover colors */
+    background-color: #133880; /* dark blue */
+    color: #ffffff;             /* white text/icon */
+}
+
+
+
+
+/* Adjust Back to Top button when mobile nav is open */
+body.mobile-nav-open #back-to-top {
+    bottom: 120px; /* move up to avoid overlap with menu (60px header + menu height) */
+}
+
+
+
+/* ------------------------------------------------ */
+/* FOOTER                                         */
+/* ------------------------------------------------ */
+.custom-footer {
+    position: fixed;
+    font-weight: bold;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #133880;
+    padding: 0.5rem 0;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Hide chat widget */
+#chat-bubble {
+    display: none !important;
+}
+
+/* Intro section full width */
+.intro-section {
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+}
+
+.intro-section .intro-content {
+    max-width: 1440px;
+    margin: auto;
+}
+
+/* Standard section full width */
+.standard-section {
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+}
+
+.standard-section .standard-content {
+    max-width: 1440px;
+    margin: auto;
+}
+
+
+
+
