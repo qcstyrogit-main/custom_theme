@@ -1,0 +1,163 @@
+/*
+
+intro.css
+
+Styles for the introductory section
+*/
+
+/* --- Default Desktop/Large Screen Styles --- */
+
+.intro-section {
+background-image: url('/assets/custom_theme/images/Intro.png');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+height: 100vh;
+display: flex;
+align-items: center;
+justify-content: flex-start;
+text-align: left;
+color: #ffffff;
+padding-top: 0;
+padding-bottom: 0;
+position: relative;
+}
+
+.intro-content {
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+width: 100%;
+max-width: 1200px;
+padding: 0 2rem;
+gap: 2rem;
+flex-wrap: wrap;
+position: relative;
+z-index: 2;
+/* ADJUSTED: Increased negative margin to move content further up */
+margin-top: -120px;
+}
+
+/* Left Text Column */
+.intro-text {
+flex: 1;
+min-width: 300px;
+padding-left: 0;
+margin-top: -100px;
+z-index: 2;
+background: none;
+}
+
+.intro-text h1 {
+font-size: 3rem;
+font-weight: 700;
+margin-bottom: 1rem;
+text-align: left;
+color: #fff; 
+text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.intro-text p {
+font-size: 1.3rem;
+line-height: 1.6;
+text-align: left;
+color: #fff; 
+text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* Right Image Column (Desktop) */
+.intro-images {
+flex: 1;
+min-width: 250px;
+position: relative;
+height: 400px;
+border-radius: 12px;
+overflow: hidden;
+margin-top: -100px;
+z-index: 1;
+}
+
+.intro-images img {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: contain;
+transition: opacity 1s ease-in-out;
+}
+
+.intro-images img.active {
+opacity: 1;
+}
+
+.intro-images img:not(.active) {
+opacity: 0;
+}
+
+/* --- Mobile View (Max Width 600px) --- */
+
+@media (max-width: 600px) {
+
+.intro-content {
+    position: relative; 
+    flex-direction: column;
+    gap: 0;
+    margin-top: 0;
+}
+
+.intro-images {
+    position: absolute; 
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    height: 100%;
+    z-index: 1; 
+    flex: none; 
+    min-width: 100%;
+    margin-top: -50px;
+    border-radius: 0; 
+}
+
+.intro-images img {
+    object-fit: contain; 
+}
+
+.intro-text {
+    position: relative; 
+    z-index: 2; 
+    min-width: 100%;
+    margin-top: -200px;
+    padding: 40px 20px;
+    flex: none;
+    height: 100%;
+
+    background-color: transparent; 
+    border-radius: 0; 
+    
+    padding-top: 100px; 
+    padding-bottom: 100px;
+}
+
+.intro-text h1 {
+    font-size: 2rem;
+    /* FIX: Align text to the left on mobile */
+    text-align: left; 
+    margin-left: -30px;
+    margin-right: -30px;
+    color: #fff; 
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.intro-text p {
+    font-size: 1.1rem;
+    /* FIX: Align text to the left on mobile */
+    margin-left: -30px;
+    margin-right: -30px;
+    text-align: left; 
+    color: #fff; 
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+
+}

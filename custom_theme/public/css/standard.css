@@ -1,0 +1,326 @@
+/*
+ * standard.css
+ * Styles for the introductory section (Renamed to standard)
+ */
+
+/* ======================================================= */
+/* 💡 FIX: GLOBAL RESET TO ENSURE FULL SCREEN COVERAGE */
+/* ======================================================= */
+
+/* ======================================================= */
+
+
+/* --- Default Desktop/Large Screen Styles --- */
+
+.standard-section {
+    background-image: url('/assets/custom_theme/images/standard.png');
+    /* FIX APPLIED: Forces the image to stretch and fill 100% of the container's width 
+        and 100% of its height (100vh), ignoring aspect ratio. */
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    align-items: center; 
+    justify-content: flex-start;
+    text-align: left;
+    color: #ffffff;
+    padding-top: 0;
+    padding-bottom: 0;
+    position: relative;
+}
+
+.standard-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 2rem;
+    gap: 2rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+    /* ADJUSTED: Increased negative margin to move content further up */
+    margin-top: -120px; 
+}
+
+/* Left Text Column */
+.standard-text {
+    flex: 1;
+    min-width: 300px;
+    padding-left: 0;
+    /* ADJUSTED: Lessened the negative margin to move the text down slightly */
+    margin-top: -200px; 
+    z-index: 2;
+    background: none; 
+}
+
+.standard-text h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    /* Keeping the original color changes: #000 */
+    text-align: left;
+    color: #fff; 
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.standard-text p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    /* Keeping the original color changes: #000 */
+    text-align: left;
+    color: #fff; 
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* Right Image Column (Desktop) */
+.standard-images {
+    flex: 1;
+    min-width: 250px;
+    position: relative;
+    height: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: -100px;
+    z-index: 1;
+}
+
+.standard-images img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: opacity 1s ease-in-out;
+}
+
+.standard-images img.active {
+    opacity: 1;
+}
+
+.standard-images img:not(.active) {
+    opacity: 0;
+}
+
+
+/* --- Mobile View (Max Width 600px) --- */
+
+@media (max-width: 600px) {
+    
+    .standard-content {
+        position: relative; 
+        flex-direction: column;
+        gap: 0;
+        margin-top: 0;
+    }
+
+    .standard-images {
+        position: absolute; 
+        top: 0; 
+        left: 0;
+        width: 100%; 
+        height: 100%;
+        z-index: 1; 
+        flex: none; 
+        min-width: 100%;
+        margin-top: -50px;
+        border-radius: 0; 
+    }
+
+    .standard-images img {
+        object-fit: contain; 
+    }
+
+    .standard-text {
+        position: relative; 
+        z-index: 2; 
+        min-width: 100%;
+        margin-top: -300px;
+        /* ADJUSTED: Increased left/right padding from 20px to 30px */
+        padding: 40px 20px; 
+        flex: none;
+        height: 100%;
+
+        background-color: transparent; 
+        border-radius: 0; 
+        
+        padding-top: 100px; 
+        padding-bottom: 100px;
+    }
+    
+    .standard-text h1 {
+        font-size: 2rem;
+        /* FIX APPLIED: Set to left alignment on mobile */
+        margin-left: -30px;
+        margin-right: -30px;
+        text-align: left; 
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    }
+
+    .standard-text p {
+        font-size: 1.1rem;
+        /* FIX APPLIED: Set to left alignment on mobile */
+        margin-left: -30px;
+        margin-right: -30px;
+        text-align: left; 
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    }
+}
+
+
+/* --- IMAGE SLIDER --- */
+
+.standard-slider {
+    /* REVERTED: Restoring original values for desktop */
+    width: auto;             
+    overflow: hidden; 
+    margin-left: -30px; 
+    margin-right: -20px; 
+    margin-top: 40px; 
+
+    /* RETAINED: Prevents cut lines and jitter */
+    position: relative;
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+.slider-track {
+    display: flex; 
+    /* RETAINED: 200% width to hold two copies of the content */
+    width: calc(200%); 
+    animation: slideInfinite 10s linear infinite; 
+
+    /* RETAINED: Ultra smooth animation hint */
+    will-change: transform;
+}
+
+.slider-track img {
+    /* RETAINED & VERIFIED: 10% width is correct for 20 images in 200% track */
+    width: 10%; 
+    flex-shrink: 0; 
+    object-fit: contain; 
+    padding: 10px; 
+
+    /* RETAINED: Prevents flicker while sliding */
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+/* Infinite Sliding Animation */
+@keyframes slideInfinite {
+    0% { 
+        transform: translateX(0);
+    }
+    100% { 
+        /* RETAINED: Translates by 50% of the 200% track */
+        transform: translateX(-50%);
+    }
+}
+
+/* --- Mobile View (Max Width 600px) --- */
+
+@media (max-width: 600px) {
+    
+    .standard-content {
+        position: relative; 
+        flex-direction: column;
+        gap: 0;
+        margin-top: 0;
+    }
+
+    .standard-images {
+        position: absolute; 
+        top: 0; 
+        left: 0;
+        width: 100%; 
+        height: 100%;
+        z-index: 1; 
+        flex: none; 
+        min-width: 100%;
+        margin-top: -50px;
+        border-radius: 0; 
+    }
+
+    .standard-images img {
+        object-fit: contain; 
+    }
+
+    .standard-text {
+        position: relative; 
+        z-index: 2; 
+        min-width: 100%;
+        margin-top: -300px;
+        padding: 40px 20px; 
+        flex: none;
+        height: 100%;
+
+        background-color: transparent; 
+        border-radius: 0; 
+        
+        padding-top: 100px; 
+        padding-bottom: 100px;
+    }
+    
+    .standard-text h1 {
+        font-size: 2rem;
+        text-align: left; 
+        color: #fff; 
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    }
+
+    .standard-text p {
+        font-size: 1.1rem;
+        text-align: left; 
+        color: #fff; 
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    }
+    
+ 
+    /* --- IMAGE SLIDER MOBILE VIEW (AUTO SCROLL + MANUAL SCROLL) --- */
+    .standard-slider {
+        display: block; 
+        height: 150px;
+        margin-top: -100px; 
+        
+        /* CRITICAL FIX: Change 'hidden' to 'auto' to enable manual swiping/scrolling */
+        overflow-x: auto; 
+        overflow-y: hidden;
+        white-space: nowrap; 
+        width: 100%;
+        
+        /* Hide scrollbar visually */
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .slider-track {
+        /* RETAINED: 200% width for duplication loop */
+        width: 200%; 
+        height: 100%;
+        
+        /* RETAINED: Animation is active by default */
+        animation: slideInfinite 10s linear infinite; 
+    }
+
+    .slider-track img {
+        /* Set to 25% of the track width for 8 total images (4 unique + 4 duplicate) */
+        flex: 0 0 25%; 
+        width: 25%; 
+        height: 100%;
+        
+        box-sizing: border-box;
+        padding: 5px; 
+        
+        object-fit: contain;
+    }
+
+}
+

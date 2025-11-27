@@ -80,3 +80,10 @@ document.getElementById('login-form').addEventListener('submit', async function(
         }, 3000);
     }
 });
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const chat = document.getElementById("chat-bubble");
+    if(chat) chat.style.display = "none";
+});
+
