@@ -1,0 +1,83 @@
+#sustainability {
+    width: 100%;
+    max-width: 1440px;
+    padding: 80px 20px;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+.sustainability-layer {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 80px;
+}
+
+.sustainability-layer.reverse {
+    flex-direction: row-reverse; /* flips text/image for Text-Image layout */
+}
+
+.sustainability-text {
+    flex: 1 1 500px;
+    color: #333;
+}
+
+.sustainability-text h2 {
+    font-size: 1.5rem;
+    color: #133880;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.sustainability-text p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.sustainability-image {
+    flex: 1 1 500px;
+    text-align: center;
+}
+
+.sustainability-image img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+}
+
+/* Fade-in animation */
+.fade-in-layer {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-layer.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive */
+@media(max-width:768px){
+    .sustainability-layer,
+    .sustainability-layer.reverse {
+        flex-direction: column; /* Stacks content vertically on small screens */
+        text-align: center;
+    }
+
+    .sustainability-text, .sustainability-image {
+        flex: unset;
+        width: 100%;
+    }
+
+    .sustainability-layer {
+        margin-bottom: 50px;
+    }
+
+    .sustainability-image img {
+        max-width: 90%;
+        margin: auto;
+    }
+}

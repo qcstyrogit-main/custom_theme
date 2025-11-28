@@ -16,9 +16,10 @@
     background-image: url('/assets/custom_theme/images/standard.png');
     /* FIX APPLIED: Forces the image to stretch and fill 100% of the container's width 
         and 100% of its height (100vh), ignoring aspect ratio. */
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 90vh;
     display: flex;
     align-items: center; 
     justify-content: flex-start;

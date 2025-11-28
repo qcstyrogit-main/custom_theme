@@ -324,6 +324,18 @@ body.mobile-nav-open #back-to-top {
     margin: auto;
 }
 
+.innovation-banner {
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+}
+
+.innovation-banner .innovation-banner {
+    max-width: 1440px;
+    margin: auto;
+}
+
 
 
 
