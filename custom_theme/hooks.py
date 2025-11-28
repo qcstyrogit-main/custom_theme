@@ -7,16 +7,37 @@ app_license = "mit"
 
 
 
-# Add this
-app_include_js = []
-app_include_css = []
-
-# Add route for forgot password
-website_route_rules = [
-    {"from_route": "/forgot-password", "to_route": "custom_theme/forgot-password"},
-    {"from_route": "/", "to_route": "home"},
+# ERP Desk (logged-in pages)
+app_include_css = [
+   
+]
+app_include_js = [
+   
 ]
 
+# Website / Public pages
+web_include_css = [
+    "/assets/custom_theme/css/forgot_password.css",
+    "/assets/custom_theme/css/home.css",
+    "/assets/custom_theme/css/intro.css",
+    "/assets/custom_theme/css/login.css",
+    "/assets/custom_theme/css/standard.css"
+]
+
+web_include_js = [
+    "/assets/custom_theme/js/forgot_password.js"  # Replace with your actual JS file(s)
+    "/assets/custom_theme/js/home.js" 
+    "/assets/custom_theme/js/intro.js" 
+    "/assets/custom_theme/js/login.js" 
+    "/assets/custom_theme/js/standard.js" 
+]
+
+# Website routes
+website_route_rules = [
+    {"from_route": "/", "to_route": "custom_theme/home"},
+    {"from_route": "/login", "to_route": "custom_theme/login"},
+    {"from_route": "/forgot-password", "to_route": "custom_theme/forgot-password"},
+]
 # Apps
 # ------------------
 
