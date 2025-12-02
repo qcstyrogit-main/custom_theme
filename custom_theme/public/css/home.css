@@ -11,10 +11,11 @@ html, body {
 }
 
 /* Hide Frappe's default header & footer */
-.navbar, .navbar.navbar-expand, .navbar-light, header.navbar, .top-bar, footer, .web-footer {
+.navbar, .navbar.navbar-expand, .navbar-light, header.navbar, .top-bar {
     display: none !important;
 }
 
+/* , footer, .web-footer */
 /* ------------------------------------------------ */
 /* HEADER                                          */
 /* ------------------------------------------------ */
@@ -320,6 +321,19 @@ body.mobile-nav-open #back-to-top {
 }
 
 .standard-section .standard-content {
+    max-width: 1440px;
+    margin: auto;
+}
+
+/* Standard section full width */
+.contact_us-section {
+    width: 100vw;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    position: relative;
+}
+
+.contact_us-section .contact_us-content {
     max-width: 1440px;
     margin: auto;
 }

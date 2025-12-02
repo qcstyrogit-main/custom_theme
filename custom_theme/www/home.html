@@ -3,8 +3,10 @@
 {%- block head %} 
 {{ super() }}
 
+
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/custom_theme/css/home.css">
+<link rel="stylesheet" href="/assets/custom_theme/css/footer.css"> 
 
 {%- endblock %}
 
@@ -75,30 +77,11 @@
     
 
     <!-- Sustainability Section -->
-
     {%- include "custom_theme/www/sections/sustainability.html" -%}
-    <!-- <section id="sustainability" class="home-content">
-        <div class="content-block">
-            <h2>Sustainability</h2>
-            <p>We are committed to eco-friendly materials and reducing environmental impact.</p>
-        </div>
-    </section> -->
 
-    <!-- Careers -->
-    <!-- <section id="careers" class="home-content">
-        <div class="content-block">
-            <h2>Careers</h2>
-            <p>Join our team and help us create sustainable packaging solutions.</p>
-        </div>
-    </section> -->
-
-    <!-- Contact -->
-    <!-- <section id="contact-us" class="home-content">
-        <div class="content-block">
-            <h2>Contact Us</h2>
-            <p>Reach out to us for inquiries, partnerships, or support.</p>
-        </div>
-    </section> -->
+    <!-- Contact Us Section -->
+    {%- include "custom_theme/www/sections/contact_us.html" -%}
+ 
 
     <!-- Back to Top -->
     <button id="back-to-top" title="Go to top">↑</button>
@@ -108,5 +91,8 @@
 {%- endblock %}
 
 {%- block footer %}
+
+<!-- Jobs Section -->
+{%- include "custom_theme/www/sections/footer.html" -%}
 <script src="/assets/custom_theme/js/home.js"></script>
 {%- endblock %}

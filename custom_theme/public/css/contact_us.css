@@ -1,0 +1,309 @@
+/* contact_us.css */
+
+/* --- Default Desktop/Large Screen Styles --- */
+.contact_us-section {
+    background-image: url('/assets/custom_theme/images/Intro.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 4rem 2rem;
+    color: #ffffff;
+}
+
+/* Container for all rows */
+.contact_us-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem; /* spacing between rows */
+}
+
+/* Header: Our Offices */
+.contact-header {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    margin-top: -30px;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+/* Each row: description + map */
+.contact_row {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+/* Text Column */
+.contact_text {
+    flex: 1;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* natural alignment for button on desktop */
+}
+
+.contact_text h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+.contact_text p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 0.8rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+/* Icons in contact info */
+.contact_text i {
+    margin-right: 8px;      /* spacing between icon and text */
+    color: #fff;            /* white icons */
+    font-size: 1.2rem;      /* slightly larger */
+    vertical-align: middle; /* aligns nicely with text */
+}
+
+/* Optional: icon hover effect */
+.contact_text i:hover {
+    color: #ffd700; /* gold on hover */
+}
+
+
+/* Map Column */
+.contact_map {
+    flex: 1;
+    min-width: 280px;
+}
+
+.contact_map iframe {
+    width: 100%;
+    height: 300px;
+    border: 0;
+    border-radius: 12px;
+}
+
+/* Responsive: Mobile View */
+@media (max-width: 768px) {
+    .contact_row {
+        flex-direction: column;
+    }
+
+    .contact_text,
+    .contact_map {
+        min-width: 100%;
+        align-items: center; /* center button and text on mobile */
+    }
+
+    .contact_text h2 {
+        font-size: 1.7rem;
+        text-align: center;
+    }
+
+    .contact_text p {
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .message-btn {
+        margin-left: auto;
+        margin-right: auto; /* center button on mobile */
+    }
+
+    .contact-header {
+        font-size: 2rem;
+    }
+
+    .contact_text i {
+        margin-right: 5px;
+        font-size: 1.1rem;
+    }
+}
+
+
+/* --- Area Filter Styles --- */
+.area-filter {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center; /* center on desktop */
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap; /* wrap on small screens */
+}
+
+.area-filter label {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+.area-filter select {
+    padding: 6px 12px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 6px;
+    border: none;
+    background-color: #0045DA;
+    color: #fff;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s, opacity 0.3s;
+    max-width: 250px;  /* limit width on all devices */
+    opacity: 0.95;
+    transform: translateY(0);
+}
+
+.area-filter select:hover {
+    background-color: #002F9C;
+    transform: translateY(-1px);
+    opacity: 1;
+}
+
+.area-filter select:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 69, 218, 0.6);
+    transform: translateY(-1px);
+    opacity: 1;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .area-filter {
+        flex-direction: column; /* stack label and select vertically */
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .area-filter select {
+        width: 50%;       /* smaller than full width */
+        max-width: 200px; /* limit width for mobile */
+        font-size: 0.95rem;
+        padding: 6px 10px;
+    }
+}
+
+/* Socials Section */
+.contact-socials {
+    text-align: center;
+    margin-top: 1.5rem; /* reduced from 3rem to 1.5rem */
+}
+
+.contact-socials h2 {
+    font-size: 2rem;
+    color: #133880;
+    /* text-shadow: 1px 1px 3px rgba(0,0,0,0.8); */
+    margin-bottom: 1rem;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.social-link {
+    font-size: 2rem;
+    transition: transform 0.3s;
+}
+
+/* Give each social its brand color */
+.social-link.facebook { color: #1877f2; }    /* Facebook Blue */
+.social-link.instagram { color: #e4405f; }   /* Instagram Gradient Pink */
+.social-link.viber { color: #665cac; }       /* Viber Purple */
+
+.social-link:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.2); /* slightly brighter on hover */
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .social-icons {
+        gap: 1rem;
+    }
+
+    .social-link {
+        font-size: 1.8rem;
+    }
+}
+
+/* Message Us Button */
+.message-btn {
+    display: inline-block; /* keeps natural width */
+    margin: 30px auto 0 auto; /* top margin + auto left/right to center */
+    padding: 12px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background-color: #0045DA;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+    text-align: center;
+}
+
+.message-btn:hover {
+    background-color: #002F9C;
+    transform: translateY(-2px);
+}
+
+.message-btn-container {
+    display: flex;
+    justify-content: center; /* centers the button */
+}
+
+/* Socials Section - default for desktop */
+.contact-socials {
+    text-align: center;
+    margin-top: -80px; /* normal spacing on desktop */
+}
+
+.contact-socials h2 {
+    font-size: 2rem;
+    color: #133880;
+    margin-bottom: 0.5rem;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.social-link {
+    font-size: 2rem;
+    transition: transform 0.3s;
+}
+
+/* Brand colors */
+.social-link.facebook { color: #1877f2; }
+.social-link.instagram { color: #e4405f; }
+.social-link.viber { color: #665cac; }
+
+.social-link:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.2);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .contact-socials {
+        margin-top: -50px; /* brings socials closer to Message Us button on mobile */
+    }
+
+    .social-icons {
+        gap: 1rem;
+    }
+    .social-link {
+        font-size: 1.8rem;
+    }
+}
+
+
+
+
