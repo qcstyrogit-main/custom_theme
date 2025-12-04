@@ -40,3 +40,25 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
+
+function openViber() {
+    const viberURL = "viber://chat?number=+639178143250";
+    const fallbackURL = "https://www.viber.com/download"; // in case Viber is not installed
+
+    // Mobile or desktop
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (isMobile) {
+        // Try opening Viber app
+        window.location.href = viberURL;
+
+        // Fallback after 1.5 seconds
+        setTimeout(() => {
+            window.location.href = fallbackURL;
+        }, 1500);
+    } else {
+        // Desktop fallback
+        alert("Viber app cannot be opened directly on desktop. Please install Viber.");
+        window.open(fallbackURL, "_blank");
+    }
+}

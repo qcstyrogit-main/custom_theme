@@ -1,0 +1,39 @@
+/* Reuse your existing styles */
+.sustainability-text {
+    flex: 1 1 100%;
+    color: #333;
+}
+
+.sustainability-text h1 {
+    font-size: 2rem;
+    color: #133880;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.sustainability-text h2 {
+    font-size: 1.2rem;
+    color: #133880;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.sustainability-text p, 
+.sustainability-text li, 
+.sustainability-text address {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #333;
+}
+
+.fade-in-layer {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-layer.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
