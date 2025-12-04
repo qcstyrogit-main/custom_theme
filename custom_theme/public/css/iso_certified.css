@@ -1,0 +1,53 @@
+#iso-certified {
+    height: 50vh;
+    padding: 3rem 1rem;
+    text-align: center;
+}
+
+#iso-certified h1 {
+    font-size: 2rem;
+    color: #133880;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+#iso-certified p {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 2rem;
+}
+
+/* Images container */
+.iso-images {
+    display: flex;
+    justify-content: space-between; /* evenly spaced horizontally */
+    align-items: center;
+    max-width: 600px;  /* container width for desktop */
+    margin: 0 auto;    /* center container */
+    gap: 2rem;         /* spacing between images */
+    flex-wrap: wrap;   /* allow wrapping on small screens */
+}
+
+/* Images */
+.iso-logo {
+    height: 150px; /* desktop images */
+    width: auto;
+    object-fit: contain;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    #iso-certified {
+        height: 50vh;  /* maintain 50vh on mobile */
+        padding: 3rem 1rem; /* maintain padding */
+    }
+
+    .iso-images {
+        flex-direction: row; /* stack vertically */
+        gap: 1rem;             /* spacing between stacked images */
+    }
+
+    .iso-logo {
+        height: 80px; /* smaller images on mobile */
+    }
+}
