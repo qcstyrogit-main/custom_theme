@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const inqHp = document.getElementById("inqHp");
 
 
-    fetch("/api/method/qcmc_logic.api.send_inquiry.send_inquiry", {
+    fetch("/api/method/qcmc_logic.api.send_inquiry.send_inquiry_qc", {
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded"

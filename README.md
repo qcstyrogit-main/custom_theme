@@ -4,4 +4,4 @@ Custom Theme
 
 #### License
 
-mit
+MIT

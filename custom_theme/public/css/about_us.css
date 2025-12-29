@@ -57,13 +57,21 @@
     overflow: hidden;
 }
 
+/* Update this specific block in your CSS */
 .events-cards {
     display: flex;
     gap: 20px;
-    overflow-x: auto;
-    scroll-behavior: smooth;
+    overflow-x: hidden; /* Changed from auto to hide scrollbar */
+    scroll-behavior: auto; /* IMPORTANT: must be auto for JS animation */
     padding-bottom: 12px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
+.events-cards::-webkit-scrollbar {
+    display: none;
+}
+
+
 
 .events-cards.dragging {
     cursor: grabbing;
@@ -296,7 +304,4 @@
     }
 }
 
-/* Disable overflow-x scroll on desktop */
-.events-cards {
-    overflow-x: hidden;
-}
+

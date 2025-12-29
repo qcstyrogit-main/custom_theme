@@ -1,82 +1,99 @@
 document.addEventListener("DOMContentLoaded", () => {
     const eventCardsContainer = document.querySelector('.events-cards');
     const eventWrapper = document.querySelector('.events-wrapper');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
     const eventCards = document.querySelectorAll('.events-cards .event-card');
 
-    // Duplicate cards for infinite scrolling
+    // ===========================
+    // DUPLICATE CARDS (ONCE)
+    // ===========================
     eventCards.forEach(card => {
-        const clone = card.cloneNode(true);
-        eventCardsContainer.appendChild(clone);
+        eventCardsContainer.appendChild(card.cloneNode(true));
     });
 
-    let scrollSpeed = 0.5; // pixels per frame
+    let scrollSpeed = 0.5;
     let isDragging = false;
+    let isPaused = false;
     let startX, scrollLeft;
+    let halfScroll;
 
+    // Calculate the reset point dynamically
+    const updateDimensions = () => {
+        halfScroll = eventCardsContainer.scrollWidth / 2;
+    };
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
+
+    // ===========================
+    // NORMALIZE SCROLL (KEY FIX)
+    // ===========================
+    const normalizeScroll = () => {
+        if (eventCardsContainer.scrollLeft < 0) {
+            eventCardsContainer.scrollLeft += halfScroll;
+        } else if (eventCardsContainer.scrollLeft >= halfScroll) {
+            eventCardsContainer.scrollLeft -= halfScroll;
+        }
+    };
+
+    // ===========================
+    // AUTO SCROLL (INFINITE)
+    // ===========================
     const animate = () => {
-        if (!isDragging) {
+        if (!isDragging && !isPaused) {
             eventCardsContainer.scrollLeft += scrollSpeed;
-            // Reset scroll for infinite loop
-            if (eventCardsContainer.scrollLeft >= eventCardsContainer.scrollWidth / 2) {
-                eventCardsContainer.scrollLeft = 0;
-            }
+            normalizeScroll();
         }
         requestAnimationFrame(animate);
     };
     animate();
 
     // ===========================
+    // NAVIGATION BUTTONS
+    // ===========================
+    const moveSlider = (direction) => {
+        const cardWidth = eventCards[0].offsetWidth + 20; // width + gap
+        eventCardsContainer.scrollLeft += direction * cardWidth;
+        normalizeScroll();
+    };
+
+    prevBtn?.addEventListener('click', () => moveSlider(-1));
+    nextBtn?.addEventListener('click', () => moveSlider(1));
+
+    // ===========================
     // DRAG & SWIPE SUPPORT
     // ===========================
-    eventCardsContainer.addEventListener('mousedown', (e) => {
+    const startDrag = (e) => {
         isDragging = true;
-        startX = e.pageX - eventCardsContainer.offsetLeft;
+        startX = (e.pageX || e.touches[0].pageX);
         scrollLeft = eventCardsContainer.scrollLeft;
         eventCardsContainer.classList.add('dragging');
-    });
+    };
 
-    eventCardsContainer.addEventListener('mouseleave', () => {
-        isDragging = false;
-        eventCardsContainer.classList.remove('dragging');
-    });
-
-    eventCardsContainer.addEventListener('mouseup', () => {
-        isDragging = false;
-        eventCardsContainer.classList.remove('dragging');
-    });
-
-    eventCardsContainer.addEventListener('mousemove', (e) => {
+    const handleMove = (e) => {
         if (!isDragging) return;
-        const x = e.pageX - eventCardsContainer.offsetLeft;
+        const x = (e.pageX || e.touches[0].pageX);
         const walk = x - startX;
         eventCardsContainer.scrollLeft = scrollLeft - walk;
-    });
+        normalizeScroll();
+    };
 
-    // Touch events
-    eventCardsContainer.addEventListener('touchstart', (e) => {
-        isDragging = true;
-        startX = e.touches[0].pageX - eventCardsContainer.offsetLeft;
-        scrollLeft = eventCardsContainer.scrollLeft;
-    });
-
-    eventCardsContainer.addEventListener('touchmove', (e) => {
-        if (!isDragging) return;
-        const x = e.touches[0].pageX - eventCardsContainer.offsetLeft;
-        const walk = x - startX;
-        eventCardsContainer.scrollLeft = scrollLeft - walk;
-    });
-
-    eventCardsContainer.addEventListener('touchend', () => {
+    const stopDrag = () => {
         isDragging = false;
-    });
+        eventCardsContainer.classList.remove('dragging');
+    };
+
+    eventCardsContainer.addEventListener('mousedown', startDrag);
+    window.addEventListener('mousemove', handleMove);
+    window.addEventListener('mouseup', stopDrag);
+
+    eventCardsContainer.addEventListener('touchstart', startDrag);
+    eventCardsContainer.addEventListener('touchmove', handleMove);
+    eventCardsContainer.addEventListener('touchend', stopDrag);
 
     // ===========================
     // HOVER PAUSE
     // ===========================
-    eventWrapper.addEventListener('mouseenter', () => {
-        scrollSpeed = 0;
-    });
-    eventWrapper.addEventListener('mouseleave', () => {
-        scrollSpeed = 0.5;
-    });
+    eventWrapper.addEventListener('mouseenter', () => isPaused = true);
+    eventWrapper.addEventListener('mouseleave', () => isPaused = false);
 });
