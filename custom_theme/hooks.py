@@ -1,9 +1,9 @@
 app_name = "custom_theme"
-app_title = "custom-theme"
+app_title = "Custom Theme"
 app_publisher = "Macdenver Magbojos"
 app_description = "Custom Theme"
 app_email = "magbojosmacdenverc@gmail.com"
-app_license = "mit"
+app_license = "MIT"
 
 home_page = "home"
 

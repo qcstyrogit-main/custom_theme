@@ -329,17 +329,19 @@ html, body {
 /* ------------------------------------------------ */
 #back-to-top {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
+    bottom: 40px;
+    left: 20px;        /* ← move to left */
+    right: auto;      /* ← disable right */
+
     z-index: 10000;
     
     width: 50px;
     height: 50px;
-    border-radius: 50%; /* Circle */
+    border-radius: 50%;
     
     background-color: #ffffff;
     color: var(--primary-color);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15); /* Soft drop shadow */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     
     font-size: 1.2rem;
     border: 1px solid rgba(0,0,0,0.05);
@@ -351,8 +353,9 @@ html, body {
     opacity: 0;
     pointer-events: none;
     transform: translateY(20px) scale(0.9);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy pop */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
 
 #back-to-top.show {
     opacity: 1;
@@ -374,6 +377,54 @@ body.mobile-nav-open #back-to-top {
 
 
 /* Hide chat widget */
-#chat-bubble {
+/* #chat-bubble {
     display: none !important;
+} */
+
+
+/* ------------------------------------------------ */
+/* CHAT BUBBLE - LOWER RIGHT, ABOVE Back-to-Top   */
+/* ------------------------------------------------ */
+#chat-bubble {
+    position: fixed !important;
+
+    bottom: 40px !important;  
+    right: 10px !important;
+
+    width: 55px !important;    
+    height: 55px !important;
+    
+
+    border-radius: 50% !important;
+
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 5px !important;
+
+    background: var(--primary-color) !important;
+    color: #fff !important;
+
+    box-shadow: 0 6px 16px rgba(19, 56, 128, 0.35) !important;
+    z-index: 9999 !important;
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover effect */
+#chat-bubble:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(19, 56, 128, 0.45);
+}
+
+/* Optional: smaller on mobile */
+@media (max-width: 768px) {
+    #chat-bubble {
+        width: 50px !important;
+        height: 50px !important;
+        font-size: 1px !important;
+        bottom: 40px !important;  
+        right: 10px !important;
+    }
 }

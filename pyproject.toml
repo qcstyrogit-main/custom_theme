@@ -6,6 +6,7 @@ authors = [
 description = "Custom Theme"
 requires-python = ">=3.10"
 readme = "README.md"
+license = "MIT"
 dynamic = ["version"]
 dependencies = [
     # "frappe~=15.0.0" # Installed and managed by bench.
