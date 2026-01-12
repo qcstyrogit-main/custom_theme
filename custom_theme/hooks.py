@@ -5,8 +5,16 @@ app_description = "Custom Theme"
 app_email = "magbojosmacdenverc@gmail.com"
 app_license = "MIT"
 
-home_page = "home"
+# home_page = "home"
 
+
+home_page = "login"
+
+# This handles the conditional redirect logic
+website_redirects = [
+    {"source": "/", "target": "/app", "condition": "frappe.session.user != 'Guest'"},
+    {"source": "/", "target": "/login", "condition": "frappe.session.user == 'Guest'"}
+]
 
 # Apps
 # ------------------
