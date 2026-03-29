@@ -16,6 +16,15 @@ website_redirects = [
     {"source": "/", "target": "/login", "condition": "frappe.session.user == 'Guest'"}
 ]
 
+web_include_css = [
+    "/assets/custom_theme/css/login.css",
+    "/assets/custom_theme/css/standard.css"
+]
+
+web_include_js = [
+    "/assets/custom_theme/js/login.js"
+]
+
 # Apps
 # ------------------
 
