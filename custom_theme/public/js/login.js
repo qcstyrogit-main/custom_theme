@@ -2,7 +2,6 @@
 document.querySelectorAll('.toggle-password').forEach((toggle) => {
     toggle.addEventListener('click', function () {
         const pwd = this.closest('.form-row')?.querySelector('input');
-        const svgUse = this.querySelector('use');
         const text = this.querySelector('.text-muted');
 
         if (!pwd) return;
@@ -48,9 +47,43 @@ async function redirectAfterLogin(result) {
     window.location.replace(target);
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+async function clearClientState() {
+    try {
+        window.localStorage.clear();
+    } catch (err) {
+        console.warn('Unable to clear localStorage:', err);
+    }
+
+    try {
+        window.sessionStorage.clear();
+    } catch (err) {
+        console.warn('Unable to clear sessionStorage:', err);
+    }
+
+    if ('caches' in window) {
+        try {
+            const cacheKeys = await caches.keys();
+            await Promise.all(cacheKeys.map((key) => caches.delete(key)));
+        } catch (err) {
+            console.warn('Unable to clear Cache Storage:', err);
+        }
+    }
+
+    if ('serviceWorker' in navigator) {
+        try {
+            const registrations = await navigator.serviceWorker.getRegistrations();
+            await Promise.all(registrations.map((registration) => registration.unregister()));
+        } catch (err) {
+            console.warn('Unable to unregister service workers:', err);
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', async function () {
     const chat = document.getElementById('chat-bubble');
     if (chat) chat.style.display = 'none';
+
+    await clearClientState();
 
     const loginForm = document.getElementById('login-form');
     if (!loginForm) return;
