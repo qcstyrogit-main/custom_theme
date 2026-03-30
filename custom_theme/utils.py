@@ -1,4 +1,5 @@
 import frappe
+from custom_theme import __version__ as APP_VERSION
 
 
 NO_STORE_HEADERS = {
@@ -25,3 +26,7 @@ def after_request(response=None):
             frappe.local.cookie_manager.delete_cookie(LOGIN_COOKIES)
 
     return response
+
+
+def get_asset_version():
+    return APP_VERSION

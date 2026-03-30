@@ -2,11 +2,12 @@
 
 {%- block head %} 
 {{ super() }}
+{% set asset_version = frappe.get_attr("custom_theme.utils.get_asset_version")() %}
 <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <!-- Include external login CSS -->
-<link rel="stylesheet" href="/assets/custom_theme/css/login.css?v=20260330-1">
+<link rel="stylesheet" href="/assets/custom_theme/css/login.css?v={{ asset_version }}">
 {%- endblock %}
 
 {%- block page_content %}
@@ -73,5 +74,5 @@
 </div>
 
 <!-- Include external login JS -->
-<script src="/assets/custom_theme/js/login.js?v=20260330-1"></script>
+<script src="/assets/custom_theme/js/login.js?v={{ asset_version }}"></script>
 {%- endblock %}
