@@ -47,73 +47,78 @@ function getRedirectTarget(result) {
 
 async function redirectAfterLogin(result) {
     const target = getRedirectTarget(result);
-    window.location.href = target;
-
-    // fallback for setups where /app is not the correct post-login route
-    setTimeout(() => {
-        if (
-            window.location.pathname === '/login' ||
-            window.location.pathname === '/' ||
-            window.location.pathname.includes('login')
-        ) {
-            window.location.href = '/desk';
-        }
-    }, 1500);
+    window.location.replace(target);
 }
-
-// Handle login form submission
-document.getElementById('login-form').addEventListener('submit', async function (e) {
-    e.preventDefault();
-
-    const form = e.target;
-    const loginButton = form.querySelector('button[type="submit"]');
-    const usernameInput = form.querySelector('#usr');
-    const passwordInput = form.querySelector('#pwd');
-
-    usernameInput.style.borderColor = '';
-    passwordInput.style.borderColor = '';
-    loginButton.disabled = true;
-    loginButton.textContent = 'Logging in...';
-
-    const data = new FormData(form);
-
-    try {
-        const response = await fetch(form.action, {
-            method: 'POST',
-            body: data,
-            credentials: 'same-origin',
-            headers: {
-                Accept: 'application/json'
-            }
-        });
-
-        let result = null;
-        try {
-            result = await response.json();
-        } catch (err) {
-            result = null;
-        }
-
-        console.log('Login response:', result);
-
-        const hasServerError =
-            result?.exc ||
-            result?.exception ||
-            result?.message === 'Invalid login credentials';
-
-        if (response.ok && !hasServerError) {
-            await redirectAfterLogin(result);
-            return;
-        }
-
-        showLoginError(loginButton, usernameInput, passwordInput);
-    } catch (err) {
-        console.error('Login error:', err);
-        showLoginError(loginButton, usernameInput, passwordInput);
-    }
-});
 
 document.addEventListener('DOMContentLoaded', function () {
     const chat = document.getElementById('chat-bubble');
     if (chat) chat.style.display = 'none';
+
+    const loginForm = document.getElementById('login-form');
+    if (!loginForm) return;
+    if (loginForm.dataset.bound === 'true') return;
+
+    loginForm.dataset.bound = 'true';
+    let isSubmitting = false;
+
+    loginForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        if (isSubmitting) return;
+
+        const form = e.target;
+        const loginButton = form.querySelector('button[type="submit"]');
+        const usernameInput = form.querySelector('#usr');
+        const passwordInput = form.querySelector('#pwd');
+
+        if (!loginButton || !usernameInput || !passwordInput) return;
+
+        isSubmitting = true;
+        form.dataset.submitting = 'true';
+        usernameInput.style.borderColor = '';
+        passwordInput.style.borderColor = '';
+        loginButton.disabled = true;
+        loginButton.textContent = 'Logging in...';
+
+        const data = new FormData(form);
+
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: data,
+                credentials: 'same-origin',
+                headers: {
+                    Accept: 'application/json'
+                }
+            });
+
+            let result = null;
+            try {
+                result = await response.json();
+            } catch (err) {
+                result = null;
+            }
+
+            console.log('Login response:', result);
+
+            const hasServerError =
+                result?.exc ||
+                result?.exception ||
+                result?.message === 'Invalid login credentials';
+
+            if (response.ok && !hasServerError) {
+                await redirectAfterLogin(result);
+                return;
+            }
+
+            isSubmitting = false;
+            form.dataset.submitting = 'false';
+            showLoginError(loginButton, usernameInput, passwordInput);
+        } catch (err) {
+            console.error('Login error:', err);
+            isSubmitting = false;
+            form.dataset.submitting = 'false';
+            showLoginError(loginButton, usernameInput, passwordInput);
+        }
+    });
 });

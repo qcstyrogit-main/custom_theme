@@ -5,10 +5,10 @@ app_description = "Custom Theme"
 app_email = "magbojosmacdenverc@gmail.com"
 app_license = "MIT"
 
-# home_page = "home"
-
-
-home_page = "login"
+# Keep the custom `/login` page available, but do not force it as the
+# application home page after authentication. Guests are already handled
+# by `website_redirects` below.
+# home_page = "login"
 
 # This handles the conditional redirect logic
 website_redirects = [
@@ -21,9 +21,7 @@ web_include_css = [
     "/assets/custom_theme/css/standard.css"
 ]
 
-web_include_js = [
-    "/assets/custom_theme/js/login.js"
-]
+web_include_js = []
 
 # Apps
 # ------------------

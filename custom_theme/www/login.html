@@ -17,11 +17,11 @@
             <h1>Login to QC & MC ERP</h1>
         </div>
 
-        <form method="post" action="/login" id="login-form">
+        <form method="post" action="/api/method/frappe.www.login.login" id="login-form">
             <div id="login-error" style="color: red; margin-bottom: 10px; display: none;"></div>
 
             <input type="hidden" name="cmd" value="login">
-            <input type="hidden" name="redirect-to" value="/app/home">
+            <input type="hidden" name="redirect-to" value="/app">
 
             <!-- Email/Username Field -->
             <div class="form-row">
