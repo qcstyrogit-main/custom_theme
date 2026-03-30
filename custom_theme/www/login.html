@@ -27,8 +27,9 @@
             <div class="form-row">
                 <label for="usr">Email or Username</label>
                 <span class="input-icon">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <use href="#es-line-email"></use>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                        <path d="m5 7 7 6 7-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </span>
                 <input id="usr" name="usr" type="text" placeholder="jane@example.com" autocomplete="username" required autofocus>
@@ -38,17 +39,19 @@
             <div class="form-row">
                 <label for="pwd">Password</label>
                 <span class="input-icon">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <use href="#es-line-lock"></use>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <rect x="5" y="11" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.8"/>
+                        <path d="M8 11V8a4 4 0 1 1 8 0v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
                     </svg>
                 </span>
                 <input id="pwd" name="pwd" type="password" placeholder="••••••" autocomplete="current-password" required>
-                <span class="toggle-password">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                        <use href="#es-line-eye"></use>
+                <button type="button" class="toggle-password" aria-label="Show password">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                        <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/>
                     </svg>
                     <span class="text-muted">Show</span>
-                </span>
+                </button>
             </div>
 
             <!-- Login Button & Forgot Password -->

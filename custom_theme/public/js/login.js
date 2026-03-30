@@ -1,7 +1,7 @@
 // Toggle password visibility
 document.querySelectorAll('.toggle-password').forEach((toggle) => {
     toggle.addEventListener('click', function () {
-        const pwd = this.previousElementSibling;
+        const pwd = this.closest('.form-row')?.querySelector('input');
         const svgUse = this.querySelector('use');
         const text = this.querySelector('.text-muted');
 
@@ -9,11 +9,9 @@ document.querySelectorAll('.toggle-password').forEach((toggle) => {
 
         if (pwd.type === 'password') {
             pwd.type = 'text';
-            if (svgUse) svgUse.setAttribute('href', '#es-line-eye-off');
             if (text) text.innerText = 'Hide';
         } else {
             pwd.type = 'password';
-            if (svgUse) svgUse.setAttribute('href', '#es-line-eye');
             if (text) text.innerText = 'Show';
         }
     });
