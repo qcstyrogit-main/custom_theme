@@ -22,7 +22,11 @@ def after_request(response=None):
 
         # Mirror the one browser action JS cannot do: expire HttpOnly auth cookies
         # so a fresh login page is not stuck behind stale session state after restarts.
-        if method == "GET" and hasattr(frappe.local, "cookie_manager"):
+        if (
+            method == "GET"
+            and frappe.session.user == "Guest"
+            and hasattr(frappe.local, "cookie_manager")
+        ):
             frappe.local.cookie_manager.delete_cookie(LOGIN_COOKIES)
 
     return response
