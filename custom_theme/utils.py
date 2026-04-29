@@ -1,6 +1,7 @@
 import frappe
 from custom_theme import __version__ as APP_VERSION
 import datetime
+import os
 
 NO_STORE_HEADERS = {
     "Cache-Control": "no-store, no-cache, must-revalidate, max-age=0",
@@ -8,25 +9,31 @@ NO_STORE_HEADERS = {
     "Expires": "0",
 }
 
+def log_debug(msg):
+    # Log to a file for debugging
+    log_path = os.path.join(frappe.get_bench_path(), "logs", "custom_debug.log")
+    with open(log_path, "a") as f:
+        f.write(f"{datetime.datetime.now()} - {frappe.local.site} - {msg}\n")
+
 def get_cookie_name():
-    # Detect version and site to determine the unique cookie name
-    if frappe.local.site == "erp.qcstyro.com":
+    # Robust check for site name
+    site = frappe.local.site or ""
+    if "erp.qcstyro.com" in site:
         return "sid_v15"
     return "sid_v16"
 
 def before_request():
     cookie_name = get_cookie_name()
+    log_debug(f"before_request: site={frappe.local.site}, cookie_name={cookie_name}, cookies={list(frappe.request.cookies.keys())}")
+    
     if cookie_name != "sid":
-        # If the browser sent our unique cookie, copy it to 'sid' so Frappe core can find it
         custom_sid = frappe.request.cookies.get(cookie_name)
-        
-        # Only set if it's a real session hash, not 'Guest'
-        # This allows Frappe's normal guest handling to take over if needed
         if custom_sid and custom_sid != "Guest":
-            frappe.form_dict.sid = custom_sid
-            # Also set it in local to be sure
-            if hasattr(frappe.local, "session_obj"):
-                frappe.local.session_obj.sid = custom_sid
+            log_debug(f"Found custom_sid={custom_sid[:10]}...")
+            frappe.local.form_dict.sid = custom_sid
+            # Also try to set it in session if it's already there
+            if hasattr(frappe.local, "session"):
+                frappe.local.session.sid = custom_sid
 
 def after_request(response=None):
     if not response:
@@ -36,18 +43,16 @@ def after_request(response=None):
     path = getattr(request, "path", "") or ""
     method = getattr(request, "method", "") or ""
 
-    # Resolve session conflict by renaming 'sid' cookie
     cookie_name = get_cookie_name()
     
     if cookie_name != "sid" and hasattr(frappe.local, "cookie_manager"):
         from urllib.parse import quote
         
-        # Check if Frappe set a 'sid' cookie
+        # Check if sid is in the manager
         if "sid" in frappe.local.cookie_manager.cookies:
             opts = frappe.local.cookie_manager.cookies.pop("sid")
+            log_debug(f"after_request: Renaming sid to {cookie_name}, value={opts.get('value')[:10]}...")
             
-            # Manually set the cookie on the response object with the shared domain
-            # Use .qcstyro.com for cross-subdomain compatibility
             response.set_cookie(
                 cookie_name,
                 quote((opts.get("value") or "").encode("utf-8")),
@@ -58,11 +63,10 @@ def after_request(response=None):
                 max_age=opts.get("max_age"),
                 domain=".qcstyro.com"
             )
-            
-            # Also ensure we clear the standard 'sid' to avoid any confusion
+            # Clear standard sid
             response.set_cookie("sid", "", expires=0, domain=".qcstyro.com")
 
-        # Also rename/set other relevant cookies to use the shared domain
+        # Sync other cookies
         for key in ["user_id", "full_name", "system_user", "user_image"]:
             if key in frappe.local.cookie_manager.cookies:
                 c_opts = frappe.local.cookie_manager.cookies.pop(key)
@@ -86,7 +90,6 @@ def after_request(response=None):
             and frappe.session.user == "Guest"
             and hasattr(frappe.local, "cookie_manager")
         ):
-            # Only delete if we are purely a Guest visiting the login page
             login_cookies = ["full_name", "user_id", "sid", cookie_name, "user_image", "system_user"]
             frappe.local.cookie_manager.delete_cookie(login_cookies)
 
