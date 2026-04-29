@@ -11,9 +11,12 @@ NO_STORE_HEADERS = {
 
 def log_debug(msg):
     # Log to a file for debugging
-    log_path = os.path.join(frappe.get_bench_path(), "logs", "custom_debug.log")
-    with open(log_path, "a") as f:
-        f.write(f"{datetime.datetime.now()} - {frappe.local.site} - {msg}\n")
+    try:
+        log_path = os.path.join(frappe.get_site_path(), "..", "..", "logs", "custom_debug.log")
+        with open(log_path, "a") as f:
+            f.write(f"{datetime.datetime.now()} - {frappe.local.site} - {msg}\n")
+    except Exception:
+        pass
 
 def get_cookie_name():
     # Robust check for site name
