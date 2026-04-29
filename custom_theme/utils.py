@@ -32,5 +32,9 @@ def after_request(response=None):
     return response
 
 
+def before_request():
+    pass
+
+
 def get_asset_version():
     return APP_VERSION
