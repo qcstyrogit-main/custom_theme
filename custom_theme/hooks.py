@@ -215,7 +215,6 @@ web_include_js = []
 # Request Events
 # ----------------
 # before_request = ["custom_theme.utils.before_request"]
-before_request = ["custom_theme.utils.before_request"]
 after_request = ["custom_theme.utils.after_request"]
 
 # Job Events
