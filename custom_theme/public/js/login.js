@@ -41,9 +41,9 @@ document.addEventListener('DOMContentLoaded', function () {
     function getRedirectTarget(result) {
         const formRedirect = loginForm.querySelector('input[name="redirect-to"]')?.value;
 
+        if (formRedirect) return formRedirect;
         if (result?.home_page) return result.home_page;
         if (result?.redirect_to) return result.redirect_to;
-        if (formRedirect) return formRedirect;
 
         return '/app';
     }
